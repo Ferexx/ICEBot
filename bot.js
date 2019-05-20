@@ -15,6 +15,7 @@ bot.login(auth.token);
 
 bot.on('ready', () => {
     console.log(`Logged in as ${bot.user.tag}!`);
+    subscribeToTwitch();
 });
 
 bot.on('message', msg => {
@@ -39,12 +40,15 @@ bot.on('message', msg => {
     }
 });
 
-xhr.open("POST", "https://api.twitch.tv/helix/webhooks/hub", true);
-xhr.setRequestHeader("Content-Type", "application/json");
-xhr.send(JSON.stringify(twitchData));
-xhr.onreadystatechange = function() {
-    var json = JSON.parse(xhr.responseText);
+function subscribeToTwitch() {
+    xhr.open("POST", "https://api.twitch.tv/helix/webhooks/hub", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(twitchData));
+    xhr.onreadystatechange = function() {
+        var json = JSON.parse(xhr.responseText);
+    }
 }
+
 
 
 function setGameInfo(array) {
