@@ -8,6 +8,14 @@ const twitchData = {
 var csgoScheduleURL = '';
 var leagueScheduleURL = '';
 
+
+//Initialisation for bot to connect to Twitch
+const clientId = '???'
+export default clientId;
+const axios = require('axios')
+import clientId from '../secrets'
+axios.defaults.headers.common['Client-ID'] = clientId
+
 bot.login(auth.token);
 
 bot.on('ready', () => {
@@ -35,6 +43,12 @@ bot.on('message', msg => {
         }
     }
 });
+
+
+async componentDidMount(){
+    let {info} = await axios.get('https://api.twitch.tv/helix/streams?user_id=52993629')
+    console.log(info)
+}
 
 http.open("POST", "https://api.twitch.tv/helix/webhooks/hub");
 http.send();
