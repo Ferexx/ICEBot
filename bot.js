@@ -20,6 +20,7 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
     var text = msg.content;
+    text = text.toLowerCase();
     if(text.substring(0, 1) === '!') {
         if (text === '!ping') {
             msg.reply('pong');
@@ -63,7 +64,7 @@ bot.on('message', msg => {
                     msg.member.addRole('584090694453428274');
                     break;
             }
-            
+
             //Colleges
             msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()));
         }
