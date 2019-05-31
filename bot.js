@@ -40,8 +40,10 @@ bot.on('message', msg => {
 
         //Adding roles to people as they request them
         if(msg.channel.name==='roles') {
-            game = text.substring(1, text.length);
-            switch(game) {
+            role = text.substring(1, text.length);
+
+            //Games
+            switch(role) {
                 case 'csgo':
                     msg.member.addRole('584072334537916431');
                     break;
@@ -57,7 +59,13 @@ bot.on('message', msg => {
                 case 'smash':
                     msg.member.addRole('584072461507887107');
                     break;
+                case 'overwatch':
+                    msg.member.addRole('584090694453428274');
+                    break;
             }
+            
+            //Colleges
+            msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()));
         }
     }
 });
