@@ -63,10 +63,11 @@ bot.on('message', msg => {
                 case 'overwatch':
                     msg.member.addRole('584090694453428274');
                     break;
-            }
 
-            //Colleges
-            msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()));
+                //Colleges
+                default:
+                    msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()));
+            }
         }
     }
 });
