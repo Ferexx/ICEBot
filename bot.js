@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const auth = require('./auth.json');
-const twitchData = {
+/*const twitchData = {
     hub.callback = "";
     hub.mode = "subscribe";
     hub.topic = "https://api.twitch.tv/helix/streams?user_id=52993629";
     hub.lease_seconds = 864000;
-}
-var xhr = new XMLHttpRequest();
+}*/
+//var xhr = new XMLHttpRequest();
 var csgoScheduleURL = '';
 var leagueScheduleURL = '';
 
@@ -15,7 +15,7 @@ bot.login(auth.token);
 
 bot.on('ready', () => {
     console.log(`Logged in as ${bot.user.tag}!`);
-    subscribeToTwitch();
+    //subscribeToTwitch();
 });
 
 bot.on('message', msg => {
@@ -36,6 +36,28 @@ bot.on('message', msg => {
         }
         if (text.includes('set') && msg.member.roles.find(r => r.name ==='Administrator')) {
             setGameInfo(text.split(" "));
+        }
+
+        //Adding roles to people as they request them
+        if(msg.channel.name==='roles') {
+            game = text.substring(1, text.length);
+            switch(game) {
+                case 'csgo':
+                    msg.member.addRole('584072334537916431');
+                    break;
+                case 'league':
+                    msg.member.addRole('584072216535367691');
+                    break;
+                case 'rocket':
+                    msg.member.addRole('584072288962347019');
+                    break;
+                case 'siege':
+                    msg.member.addRole('584072411423571992')
+                    break;
+                case 'smash':
+                    msg.member.addRole('584072461507887107');
+                    break;
+            }
         }
     }
 });
