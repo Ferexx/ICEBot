@@ -55,7 +55,7 @@ bot.on('message', msg => {
                     msg.member.addRole('584072288962347019');
                     break;
                 case 'siege':
-                    msg.member.addRole('584072411423571992')
+                    msg.member.addRole('584072411423571992');
                     break;
                 case 'smash':
                     msg.member.addRole('584072461507887107');
