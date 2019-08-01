@@ -64,7 +64,9 @@ bot.on('message', msg => {
                     msg.member.addRole('584090694453428274');
                     break;
                 case 'tft':
-                    msg.member.addRole('606254744314576896');
+                    msg.member.addRole('606254744314576896')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
 
                 //Colleges
