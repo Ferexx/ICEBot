@@ -109,8 +109,8 @@ bot.on('message', msg => {
                 if (role == null) throw "not a role";
                 guildMember.addRole(server.roles.findKey(r => r.name.toLowerCase() === msg.content.toLowerCase()));
             } catch (e) {
-                if (text === 'nuig') role = '480425709769064448' {
-                    guildMember.addRole(role);
+                if (text === 'nuig') {
+                    guildMember.addRole('480425709769064448');
                 }
                 else {
                     console.error(e);
