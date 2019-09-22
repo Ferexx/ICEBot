@@ -109,9 +109,14 @@ bot.on('message', msg => {
                 if (role == null) throw "not a role";
                 guildMember.addRole(server.roles.findKey(r => r.name.toLowerCase() === msg.content.toLowerCase()));
             } catch (e) {
-                console.error(e);
-                msg.author.send('I can\'t seem to find that college in our server. Please try again or contact an admin if you think there\'s been an error.');
-                return;
+                if (text === 'nuig') role = '480425709769064448' {
+                    guildMember.addRole(role);
+                }
+                else {
+                    console.error(e);
+                    msg.author.send('I can\'t seem to find that college in our server. Please try again or contact an admin if you think there\'s been an error.');
+                    return;
+                }
             }
             msg.author.send('Thanks! I\'ve given you the ' + msg.content + ' role. You can now send messages in the server.\nYou can get more roles in the #roles channel in the server.');
         }
