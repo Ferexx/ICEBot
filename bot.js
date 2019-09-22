@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const auth = require('./auth.json');
 var server;
+var guildMember;
 /*const twitchData = {
     hub.callback = "";
     hub.mode = "subscribe";
@@ -99,15 +100,20 @@ bot.on('message', msg => {
                         .catch(console.error);
             }
         }
-        if(msg.channel.type==='dm') {
-            if(server.available) {
-                var guildMember = server.fetchMember(msg.author);
-                console.log(guildMember.user.username);
+    }
+    if(msg.channel.type==='dm') {
+        if(server.available) {
+            try {
+                console.log(server.name + msg.author.username);
+                var role = server.roles.findKey(r => r.name.toLowerCase() === msg.content.toLowerCase());
+                if (role == null) throw "not a role";
+                guildMember.addRole(server.roles.findKey(r => r.name.toLowerCase() === msg.content.toLowerCase()));
+            } catch (e) {
+                console.error(e);
+                msg.author.send('I can\'t seem to find that college in our server. Please try again or contact an admin if you think there\'s been an error.');
+                return;
             }
-            guildMember.addRole(server.roles.findKey(r => r.name.toLowerCase() === msg.content.toLowerCase()))
-                .then(console.log)
-                .catch(console.error);
-            msg.author.send('Thanks! I\'ve given you the ' + msg.content + 'role. You can now send messages in the server.\nYou can get more roles in the #roles channel in the server.');
+            msg.author.send('Thanks! I\'ve given you the ' + msg.content + ' role. You can now send messages in the server.\nYou can get more roles in the #roles channel in the server.');
         }
     }
 });
@@ -115,6 +121,7 @@ bot.on('message', msg => {
 bot.on('guildMemberAdd', member => {
     member.send('Hello, ' + member.user.username + ', and welcome to the ICE Discord server!\nIn order for you to send messages in the server, we need to know which college you are attending. Please reply to this message with the initials of the college you are attending.\nFor example, if you are attending University College Dublin, simply reply with UCD.\nIf you are graduated from college, please reply with "Alumni" without quotes.');
     server = member.guild;
+    guildMember = member;
 });
 
 function subscribeToTwitch() {
