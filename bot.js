@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const auth = require('./auth.json');
+var server;
 /*const twitchData = {
     hub.callback = "";
     hub.mode = "subscribe";
@@ -41,41 +42,78 @@ bot.on('message', msg => {
 
         //Adding roles to people as they request them
         if(msg.channel.name==='roles') {
-            role = text.substring(1, text.length);
+            role = text.substring(1, text.length).toLowerCase();
 
             //Games
             switch(role) {
                 case 'csgo':
-                    msg.member.addRole('584072334537916431');
+                    msg.member.addRole('584072334537916431')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'league':
-                    msg.member.addRole('584072216535367691');
+                    msg.member.addRole('584072216535367691')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'rocket':
-                    msg.member.addRole('584072288962347019');
+                    msg.member.addRole('584072288962347019')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'siege':
-                    msg.member.addRole('584072411423571992');
+                    msg.member.addRole('584072411423571992')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'smash':
-                    msg.member.addRole('584072461507887107');
+                    msg.member.addRole('584072461507887107')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'overwatch':
-                    msg.member.addRole('584090694453428274');
+                    msg.member.addRole('584090694453428274')
+                        .then(console.log)
+                        .catch(console.error);
                     break;
                 case 'tft':
                     msg.member.addRole('606254744314576896')
                         .then(console.log)
                         .catch(console.error);
                     break;
+                case 'nuig':
+                    msg.member.addRole('480425709769064448')
+                        .then(console.log)
+                        .catch(console.error);
+                    break;
+                case 'alumni':
+                    msg.member.addRole('570404609387135003')
+                        .then(console.log)
+                        .catch(console.error);
+                    break;
 
                 //Colleges
                 default:
-                    msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()));
+                    msg.member.addRole(msg.guild.roles.findKey(r => r.name.toLowerCase() === role.toLowerCase()))
+                        .then(console.log)
+                        .catch(console.error);
             }
+        }
+        if(message.channel.type==='dm') {
+            message.member.addRole(server.roles.findKey(r => r.name.toLowerCase() === message.content.toLowerCase()))
+                .then(console.log)
+                .catch(console.error);
+            member.send('Thanks! I\'ve given you the ' + message.content + 'role. You can now send messages in the server.\nYou can get more roles in the #roles channel in the server.');
         }
     }
 });
+
+bot.on('guildMemberAdd', member => {
+    member.send('Hello, ' + member.user.username + ', and welcome to the ICE Discord server!\nIn order for you to send messages in the server, we need to know which college you are attending. Please reply to this message with the initials of the college you are attending.\nFor example, if you are attending University College Dublin, simply reply with UCD.\nIf you are graduated from college, please reply with "Alumni" without quotes.');
+    server = member.guild;
+});
+
+
 
 
 function subscribeToTwitch() {
